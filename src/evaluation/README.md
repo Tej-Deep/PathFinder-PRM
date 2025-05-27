@@ -38,7 +38,7 @@ This will output:
 ```yaml
 model_args:
   model: disc_PRM                                    # Model identifier
-  model_args: pretrained=declare-lab/PathFinder-PRM-7B  # Model path/name
+  model_args: pretrained=<model_path>  # Model path/name
   batch_size: 1                                      # Batch size per GPU
   num_workers: 0                                     # DataLoader workers
 
@@ -89,20 +89,3 @@ This evaluation setup builds upon the work of several open-source repositories. 
 - [Math-Verify](https://github.com/huggingface/Math-Verify): Tool to evaluate math responses
 
 Please refer to their respective repositories for license and contribution details.
-
-
-## Citation
-
-If you found our evaluation setup helpful, please cite:
-
-```bibtex
-@misc{pala2025errortypingsmarterrewards,
-      title={Error Typing for Smarter Rewards: Improving Process Reward Models with Error-Aware Hierarchical Supervision}, 
-      author={Tej Deep Pala and Panshul Sharma and Amir Zadeh and Chuan Li and Soujanya Poria},
-      year={2025},
-      eprint={2505.19706},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2505.19706}, 
-}
-```

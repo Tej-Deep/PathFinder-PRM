@@ -1,6 +1,7 @@
 import json
 import time
 from tqdm import tqdm  # Import tqdm for progress bar
+from datasets import Dataset
 
 GOOD_TOKEN='<+>'
 BAD_TOKEN='<->'
@@ -66,19 +67,13 @@ def build_conversation(user_prompt, samples, inputs):
 
 print("Loading dataset...")
 
-with open('./dataset/Disc_PRM_ds_1.json', 'r') as f:
-    prm800k_1 = json.load(f)
+with open('./dataset/Disc_PRM_ds.json', 'r') as f:
+    prm800k_data = json.load(f)
 
-with open('./dataset/Disc_PRM_ds_2.json', 'r') as f:
-    prm800k_2 = json.load(f)
+with open('./dataset/processed_mistral_dataset_scored_cleaned.json', 'r') as f:
+    mistral_data = json.load(f)
 
-with open('./dataset/processed_mistral_dataset_scored_cleaned_1.json', 'r') as f:
-    mistral_1 = json.load(f)
-
-with open('./dataset/processed_mistral_dataset_scored_cleaned_2.json', 'r') as f:
-    mistral_2 = json.load(f)
-
-scored_dataset = prm800k_1 + prm800k_2 + mistral_1 + mistral_2
+scored_dataset = prm800k_data + mistral_data
 
 print(len(scored_dataset))
 input("Start:")
@@ -131,7 +126,6 @@ try:
 except IOError as e:
     print(f"Error writing to file '{filename}': {e}")
 
-from datasets import Dataset
 hf_dataset = Dataset.from_list(new_dataset)
 split_dataset = hf_dataset.train_test_split(test_size=0.05, seed=42)
 

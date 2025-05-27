@@ -19,19 +19,17 @@ Scores of -1 correspond to invalid samples.
 ## Prerequisites
 
 ### Required Dependencies
-
-```bash
-pip install torch transformers vllm datasets tqdm
-```
+* torch
+* transformers
+* vllm
+* datasets
 
 ### Required Model Access
-
 - DeepSeek-R1-Distill-Qwen-32B (for score annotation)
-- Sufficient GPU memory for VLLM inference (recommended: 4 or more GPUs)
 
 ### Required Data Files
 
-#### For PRM800K:
+#### PRM800K:
 
 Download these files from [OpenAI PRM800K](https://github.com/openai/prm800k) and place in `./dataset/`:
 
@@ -43,7 +41,7 @@ dataset/
 └── phase2_test.jsonl
 ```
 
-#### For Mistral Data:
+#### Mistral Data:
 
 Download the RLHFlow Mistral dataset from [huggingface](https://huggingface.co/datasets/RLHFlow/Mistral-PRM-Data) and place as:
 
@@ -63,7 +61,7 @@ python load_data.py
 
 This script:
 
-- Loads the 4 PRM800K jsonl files
+- Loads the PRM800K jsonl files
 - Converts them to a unified format with context, question, prev_steps, curr_step
 - Saves to `./dataset/processed_dataset.json`
 
@@ -95,8 +93,6 @@ This script:
 - For human_score=-1: runs LLM inference with consistency checks
 - Saves to `./dataset/Disc_PRM_ds.json`
 
-**Note**: This step requires significant GPU resources and may take several hours.
-
 ### Step 4: Generate 3D Labels for Mistral Data
 
 ```bash
@@ -109,8 +105,6 @@ This script:
 - Runs LLM inference on sampled Mistral data (150K each of score 0/1)
 - Implements disagreement filtering between Mistral scores and model predictions
 - Saves to `./dataset/processed_mistral_dataset_scored.json`
-
-**Note**: This step requires significant GPU resources and may take several hours.
 
 ### Step 5: Clean Mistral Data
 
@@ -201,19 +195,3 @@ The final training dataset contains records with:
 1. **GPU Memory Errors**: Reduce `BATCH_SIZE` or `max_num_batched_tokens`
 2. **Score Extraction Failures**: Check regex patterns in inference scripts
 3. **Missing Files**: Ensure all prerequisite data files are downloaded
-
-## Citation
-
-If you use this data generation pipeline, please cite:
-
-```bibtex
-@misc{pala2025errortypingsmarterrewards,
-      title={Error Typing for Smarter Rewards: Improving Process Reward Models with Error-Aware Hierarchical Supervision}, 
-      author={Tej Deep Pala and Panshul Sharma and Amir Zadeh and Chuan Li and Soujanya Poria},
-      year={2025},
-      eprint={2505.19706},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2505.19706}, 
-}
-```

@@ -19,12 +19,12 @@ python prepare_model.py
 
 ## 2. Downloading and Processing the Training Dataset
 
-The PathFinder training dataset, **PathFinder-600K**, is available on Hugging Face with the dataset ID: [`declare-lab/PathFinder-600K`](https://huggingface.co/datasets/declare-lab/PathFinder-600K).
+After generating the dataset by following the steps under `src/data_generation`, you can run the following script to tokenize and preprocess the dataset for training. 
 
-To download and preprocess the dataset:
+To tokenize and preprocess the dataset:
 
 ```bash
-python prepare_train_dataset.py
+python prepare_train_dataset.py '<path to generated data>'
 ```
 
 ---
@@ -48,18 +48,4 @@ Once all configurations are set, start training with:
 
 ```bash
 bash train_prm.sh
-```
-
-## Citation
-
-```bibtex
-@misc{pala2025errortypingsmarterrewards,
-      title={Error Typing for Smarter Rewards: Improving Process Reward Models with Error-Aware Hierarchical Supervision}, 
-      author={Tej Deep Pala and Panshul Sharma and Amir Zadeh and Chuan Li and Soujanya Poria},
-      year={2025},
-      eprint={2505.19706},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2505.19706}, 
-}
 ```

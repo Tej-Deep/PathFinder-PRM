@@ -64,11 +64,3 @@ print("Average: ", average_sensitivity)
 print(("=================="))
 overall = get_score(None, data)
 print("Overall: ", overall)
-
-# for clean, ready-to-use numbers
-print("latex")
-results = [redundency, circular, average_simplicity, counterfactual, step_consistency, \
-           domain_consistency, confidence, average_soundness, missing_condition, deception, \
-            multi_solutions, average_sensitivity, overall]
-latex_str = " & ".join([f'{result*100:.1f}' for result in results])
-print(latex_str)

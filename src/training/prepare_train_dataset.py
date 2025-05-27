@@ -1,12 +1,19 @@
+import sys
 from datasets import load_dataset, DatasetDict
 from transformers import AutoTokenizer
+    
+if len(sys.argv) != 2:
+    print("Usage: python prepare_train_dataset.py <path_to_dataset_in_disk>")
+    sys.exit(1)
+    
+file_path = sys.argv[1]
 
 tokenizer = AutoTokenizer.from_pretrained(
     "./models/Qwen2.5-Math-7B-Instruct-updated",
     use_fast = True
 )
 
-raw_datasets = load_dataset("declare-lab/PathFinder-600K")
+raw_datasets = load_dataset(file_path)
 column_names = list(raw_datasets["train"].features)
 
 def batch_preprocess(batch):

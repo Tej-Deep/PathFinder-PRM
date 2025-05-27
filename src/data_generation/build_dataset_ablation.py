@@ -66,13 +66,10 @@ def build_conversation(user_prompt, samples, inputs):
 
 print("Loading dataset...")
 
-with open('./dataset/Disc_PRM_ds_1.json', 'r') as f:
-    prm800k_1 = json.load(f)
+with open('./dataset/Disc_PRM_ds.json', 'r') as f:
+    prm800k_data = json.load(f)
 
-with open('./dataset/Disc_PRM_ds_2.json', 'r') as f:
-    prm800k_2 = json.load(f)
-
-scored_dataset = prm800k_1 + prm800k_2 
+scored_dataset = prm800k_data
 
 print(len(scored_dataset))
 input("Start:")
